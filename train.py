@@ -24,6 +24,7 @@ def train_epoch(train_loader, criterion, optimizer):
         # Compute the loss
         loss = criterion(outputs.to(device), targets.to(device))
         print(loss)
+        total_loss.append(loss)
         optimizer.zero_grad()
         # Backward pass
         loss.backward()
@@ -65,4 +66,4 @@ for epoch in range(cfg.num_epochs):
     # Optionally, print the loss after each epoch
     print(f"Epoch {epoch+1}, Loss: {loss.item()}")
 
-    torch.save(model.state_dict(), os.path.join(cfg.checkpoint_dir, f'saved_model_{epoch}.pth'))
+    torch.save(model.state_dict(), os.path.join(cfg.checkpoint_dir, f'saved_model_{epoch}_{loss}.pth'))
