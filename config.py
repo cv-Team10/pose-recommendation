@@ -15,6 +15,7 @@ class Config:
         self.learning_rate = 2e-4
         self.batch_size = 16
         self.weight_decay = 5e-4
+        self.num_workers = 4
 
         self.checkpoint_dir = 'checkpoints/experiment1'
         if not os.path.exists('checkpoints'):

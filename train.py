@@ -55,7 +55,7 @@ with open(os.path.join(data_path, 'mask_data.csv'), 'r') as f:
       data_list = list(f.readlines())
 
 train_dataset = MaskDataset('./data', data_list, cfg)
-train_dataloader = DataLoader(train_dataset, batch_size=cfg.batch_size, shuffle=True)
+train_dataloader = DataLoader(train_dataset, batch_size=cfg.batch_size, shuffle=True, num_workers=cfg.num_workers)
 
 criterion = CustomLoss()
 optimizer = optim.Adam(model.parameters(), lr=cfg.learning_rate, weight_decay=cfg.weight_decay)
