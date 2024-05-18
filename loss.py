@@ -49,8 +49,7 @@ class CustomLoss(nn.Module):
         reg_pred = output[:,:,:2]
         class_pred = output[:,:,2]
         reg_gt = target[:,:,:2]
-        #class_gt = target[:,:,2]
-        class_gt = torch.ones(class_pred.size())
+        class_gt = target[:,:,2]
         loss_reg = 0
 
         #binary classification loss(binary cross entropy)

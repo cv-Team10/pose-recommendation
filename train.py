@@ -22,7 +22,7 @@ def train_epoch(train_loader, criterion, optimizer):
 
         targets = torch.cat((norm_pose_keypoints, class_label.unsqueeze(-1)), dim=-1)
         # Compute the loss
-        loss = criterion(outputs, targets.to(device))
+        loss = criterion(outputs.to(device), targets.to(device))
         print(loss)
         optimizer.zero_grad()
         # Backward pass
