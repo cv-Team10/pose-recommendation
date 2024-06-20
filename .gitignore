@@ -3,3 +3,7 @@ checkpoints
 __pycache__
 .vscode
 .DS_Store
+test
+checkpoints.zip
+data.zip
+mask_0.4.txt

@@ -4,11 +4,11 @@ class Config:
     def __init__(self):
         
         self.device = 'cpu' # ['cuda:0', 'cpu']
-        self.model_type = 'pose_resnet' # ['pose_resnet', 'resnet']
+        self.model_type = 'vae' # ['pose_resnet', 'resnet', 'transformer', 'vae']
 
         if self.model_type == 'pose_resnet':
             self.image_resize = (256, 192)
-        if self.model_type == 'resnet':
+        if self.model_type == 'resnet' or self.model_type == 'transformer' or self.model_type == 'vae':
             self.image_resize = (224, 224)
 
         self.num_epochs = 1000

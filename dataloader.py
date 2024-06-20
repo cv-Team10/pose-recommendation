@@ -34,7 +34,7 @@ class MaskDataset(Dataset):
         norm_pose_keypoints = torch.tensor(norm_pose_keypoints)
         class_label = torch.tensor(class_label)
 
-        return transformed_image, norm_pose_keypoints, class_label
+        return transformed_image, norm_pose_keypoints, class_label, image_name, torch.tensor(mask_box)
     
     def preprocess(self, data_list):
         annotation_list = []
@@ -47,9 +47,9 @@ class MaskDataset(Dataset):
             annotation_list.append((image_name, norm_pose_keypoints, class_label, mask_box))
         return annotation_list
     
-def convert_norm_to_keypoints(norm_keypoints, label, mask_box):
+def convert_norm_to_keypoints(norm_keypoints, label, mask_box, threshold=0.5):
         mask_size = (mask_box[2] - mask_box[0], mask_box[3] - mask_box[1])
-        keypoints = [(round(x[0] * mask_size[0] + mask_box[0]), round(x[1] * mask_size[1] + mask_box[1])) if label[idx] == 1 else (-1, -1) for idx, x in enumerate(norm_keypoints)]
+        keypoints = [(round(x[0] * mask_size[0] + mask_box[0]), round(x[1] * mask_size[1] + mask_box[1])) if label[idx] > threshold else (-1, -1) for idx, x in enumerate(norm_keypoints)]
         return keypoints
 
 if __name__ == '__main__':

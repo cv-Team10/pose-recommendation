@@ -67,9 +67,9 @@ class CustomLoss(nn.Module):
         for idx in range(batch_size):
             pred = key_points_pred[idx]
             gt = key_points_gt[idx]
-            num_joints = 0
+            num_joints = 1
             for idx2 in range(17):
-                if class_pred[idx, idx2] >= 0.5: 
+                if class_gt[idx, idx2] == 1: 
                     num_joints += 1
             loss_reg += 0.5 * self.criterion_reg(pred, gt) / num_joints
         return loss_class + loss_reg / batch_size
